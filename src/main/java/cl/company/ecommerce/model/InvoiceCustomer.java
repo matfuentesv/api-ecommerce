@@ -1,11 +1,8 @@
 package cl.company.ecommerce.model;
 
-import java.util.List;
-
 public class InvoiceCustomer {
     private Customer customer;
-    private List<Invoiceitem>invoiceitems;
-    private String date;
+    private Invoiceitem invoiceitem;
 
     public Customer getCustomer() {
         return customer;
@@ -16,21 +13,12 @@ public class InvoiceCustomer {
         return this;
     }
 
-    public List<Invoiceitem> getInvoiceitems() {
-        return invoiceitems;
+    public Invoiceitem getInvoiceitem() {
+        return invoiceitem;
     }
 
-    public InvoiceCustomer setInvoiceitems(List<Invoiceitem> invoiceitems) {
-        this.invoiceitems = invoiceitems;
-        return this;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public InvoiceCustomer setDate(String date) {
-        this.date = date;
+    public InvoiceCustomer setInvoiceitem(Invoiceitem invoiceitem) {
+        this.invoiceitem = invoiceitem;
         return this;
     }
 }

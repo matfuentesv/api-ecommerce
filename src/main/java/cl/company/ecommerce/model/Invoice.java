@@ -1,28 +1,24 @@
 package cl.company.ecommerce.model;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
 
 public class Invoice {
 
 
     private Customer customer;
-    private List<Invoiceitem> items;
+    private Invoiceitem invoiceitem;
     private BigDecimal total;
     private BigDecimal discount;
     private BigDecimal totalWithDiscount;
-    private String date;
 
 
     public Invoice(){}
-    public Invoice(Customer customer, List<Invoiceitem> items, BigDecimal total, BigDecimal discount,BigDecimal totalWithDiscount,String date) {
+    public Invoice(Customer customer, Invoiceitem invoiceitem, BigDecimal total, BigDecimal discount, BigDecimal totalWithDiscount) {
         this.customer = customer;
-        this.items = items;
+        this.invoiceitem = invoiceitem;
         this.total = total;
         this.discount = discount;
         this.totalWithDiscount = totalWithDiscount;
-        this.date = date;
     }
 
     public Customer getCustomer() {
@@ -34,14 +30,7 @@ public class Invoice {
         return this;
     }
 
-    public List<Invoiceitem> getItems() {
-        return items;
-    }
 
-    public Invoice setItems(List<Invoiceitem> items) {
-        this.items = items;
-        return this;
-    }
 
     public BigDecimal getTotal() {
         return total;
@@ -70,12 +59,12 @@ public class Invoice {
         return this;
     }
 
-    public String getDate() {
-        return date;
+    public Invoiceitem getInvoiceitem() {
+        return invoiceitem;
     }
 
-    public Invoice setDate(String date) {
-        this.date = date;
+    public Invoice setInvoiceitem(Invoiceitem invoiceitem) {
+        this.invoiceitem = invoiceitem;
         return this;
     }
 }

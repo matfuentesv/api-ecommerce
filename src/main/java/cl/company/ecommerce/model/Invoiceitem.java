@@ -1,50 +1,38 @@
 package cl.company.ecommerce.model;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 public class Invoiceitem {
+    
+    private int id;
+    private String date;
+    private List<Product> products;
 
-    private Long id;
-    private String description;
-    private BigDecimal unitPrice;
-    private int quantity;
 
-    public Invoiceitem(Long id, String description, BigDecimal unitPrice, int quantity) {
-        this.id = id;
-        this.description = description;
-        this.unitPrice = unitPrice;
-        this.quantity = quantity;
-    }
-
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Invoiceitem setId(int id) {
         this.id = id;
+        return this;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDate() {
+        return date;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public Invoiceitem setDate(String date) {
+        this.date = date;
+        return this;
     }
 
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public Invoiceitem setProducts(List<Product> products) {
+        this.products = products;
+        return this;
     }
 }
