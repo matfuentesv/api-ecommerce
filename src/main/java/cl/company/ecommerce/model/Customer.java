@@ -1,5 +1,7 @@
 package cl.company.ecommerce.model;
 
+import java.util.List;
+
 public class Customer {
 
     private String id;
@@ -7,8 +9,8 @@ public class Customer {
     private String lastName;
     private int age;
     private String phone;
-
     private String address;
+    private List<Roles>roles;
 
     public Customer(){}
 
@@ -72,6 +74,15 @@ public class Customer {
 
     public Customer setAddress(String address) {
         this.address = address;
+        return this;
+    }
+
+    public List<Roles> getRoles() {
+        return roles;
+    }
+
+    public Customer setRoles(List<Roles> roles) {
+        this.roles = roles;
         return this;
     }
 }

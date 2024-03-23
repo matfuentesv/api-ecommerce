@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "96ad73f7-3c26-411d-99b5-e9c3cf2b4e97",
+		"name": "api-ecommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1152972",
+		"_collection_link": "https://galactic-sunset-296695.postman.co/workspace/1.--Configuration~48e44916-e4da-4990-b641-c948b388dcab/collection/1152972-96ad73f7-3c26-411d-99b5-e9c3cf2b4e97?action=share&source=collection_link&creator=1152972"
+	},
+	"item": [
+		{
+			"name": "findCustomerInvoice",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/findCustomerInvoice/mgonzalez/2024-03-22 14:25",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"findCustomerInvoice",
+						"mgonzalez",
+						"2024-03-22 14:25"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findCustomer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/findCustomer/frojas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"findCustomer",
+						"frojas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findInvoiceItem",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/api/findInvoiceItem/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"findInvoiceItem",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
