@@ -2,16 +2,13 @@ package cl.company.ecommerce.service;
 
 import cl.company.ecommerce.model.Customer;
 import cl.company.ecommerce.model.Invoice;
-import cl.company.ecommerce.model.Invoiceitem;
+import cl.company.ecommerce.model.InvoiceCustomer;
 import cl.company.ecommerce.repository.EcommerceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EcommerceServiceImpl implements EcommerceService {
@@ -21,39 +18,48 @@ public class EcommerceServiceImpl implements EcommerceService {
 
     @Override
     public Invoice generateBill(String id) {
-        // Buscar Cliente
-        Optional<Customer> customerOptional = ecommerceRepository
-                .dataSourceCustomer()
+
+        final InvoiceCustomer invoiceCustomer = ecommerceRepository
+                .dataSourceInvoceCustomer()
                 .stream()
-                .filter(x -> x.getId().equalsIgnoreCase(id))
-                .findFirst();
+                .filter(x -> x.getCustomer().getId().equalsIgnoreCase(id))
+                .findFirst().orElse(null);
+
+
+        if (invoiceCustomer == null) {
+            return new Invoice();
+        }
 
         // Verificar si el cliente existe y calcular el descuento
-        BigDecimal descuento = calcularDescuento(customerOptional, LocalDate.now().getDayOfWeek());
+        BigDecimal descuento = calculateDiscount(invoiceCustomer.getCustomer(), LocalDate.now().getDayOfWeek());
 
-        // Simular la generación de la factura para el usuario
-        List<Invoiceitem> items = Arrays.asList(
-                new Invoiceitem(1L, "Producto 1", new BigDecimal("10.000"), 1),
-                new Invoiceitem(2L, "Producto 2", new BigDecimal("10.000"), 1)
-        );
 
-        BigDecimal total = items.stream()
-                .map(item -> item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal total = invoiceCustomer.getInvoiceitems()
+                                          .stream()
+                                          .map(item -> item.getUnitPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
+                                          .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         // Aplicar descuento al total
-        total = total.subtract(total.multiply(descuento));
+        BigDecimal totalConDescuento = total.subtract(total.multiply(descuento));
 
-        return new Invoice(1L, customerOptional, items, total, descuento);
+        // Crear la factura con los datos calculados
+        return new Invoice(invoiceCustomer.getCustomer(), invoiceCustomer.getInvoiceitems(), total, descuento, totalConDescuento,invoiceCustomer.getDate());
     }
 
-    public BigDecimal calcularDescuento(Optional<Customer> customerOptional, DayOfWeek dayOfWeek) {
-        // Verificar si el cliente está registrado y si es un día específico de la semana
-        if (customerOptional.isPresent() && dayOfWeek == DayOfWeek.SUNDAY) {
-            // Aplicar un descuento del 10% para clientes registrados los lunes
-            return new BigDecimal("0.10"); // 10% de descuento
+    public BigDecimal calculateDiscount(Customer customer, DayOfWeek dayOfWeek) {
+        // Verificar si el cliente está registrado
+        if (customer != null) {
+            // Aplicar un descuento según el día de la semana
+            return switch (dayOfWeek) {
+                case MONDAY -> new BigDecimal("0.10"); // 10% de descuento los lunes
+                case TUESDAY -> new BigDecimal("0.05"); // 5% de descuento los martes
+                case WEDNESDAY -> new BigDecimal("0.04"); // 4% de descuento los miércoles
+                case THURSDAY -> new BigDecimal("0.03"); // 3% de descuento los jueves
+                case FRIDAY -> new BigDecimal("0.02"); // 2% de descuento los jueves
+                default -> BigDecimal.ZERO; // Sin descuento por defecto para otros días
+            };
         } else {
-            return BigDecimal.ZERO; // Sin descuento
+            return BigDecimal.ZERO; // Sin descuento si el cliente no está registrado
         }
     }
 }
