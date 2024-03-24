@@ -55,18 +55,18 @@ public class EcommerceRepositoryImpl implements EcommerceRepository{
 
 
         final List<Product> items1 = Arrays.asList(
-                new Product(1L, "Producto 1", new BigDecimal("10.000"), 5),
-                new Product(2L, "Producto 2", new BigDecimal("10.000"), 5)
+                new Product(1L, "Audifonos", new BigDecimal("10000"), 5),
+                new Product(2L, "Mouse", new BigDecimal("10000"), 5)
         );
 
         final List<Product> items2 = Arrays.asList(
-                new Product(1L, "Producto 3", new BigDecimal("100.000"), 5),
-                new Product(2L, "Producto 4", new BigDecimal("20.000"), 5)
+                new Product(1L, "Monitor", new BigDecimal("100000"), 5),
+                new Product(2L, "PC", new BigDecimal("550000"), 1)
         );
 
         final List<Product> items3 = Arrays.asList(
-                new Product(1L, "Producto 5", new BigDecimal("10.000"), 5),
-                new Product(2L, "Producto 6", new BigDecimal("5.000"), 5)
+                new Product(1L, "Celular", new BigDecimal("100000"), 5),
+                new Product(2L, "Reloj Inteligente", new BigDecimal("600000"), 1)
         );
 
 
