@@ -1,20 +1,32 @@
 package cl.company.ecommerce.model;
 
-import java.math.BigDecimal;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import org.springframework.hateoas.RepresentationModel;
 
-public class Product {
 
+@Entity(name = "Producto")
+public class Product extends RepresentationModel<Product> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String description;
-    private BigDecimal unitPrice;
-    private int quantity;
+    @Column(name = "nombre")
+    @NotBlank(message = "No puede ingresar una descripcion vacia")
+    @NotNull(message = "No puede ingresar una descripcion nula")
+    private String nombre;
 
-    public Product(Long id, String description, BigDecimal unitPrice, int quantity) {
-        this.id = id;
-        this.description = description;
-        this.unitPrice = unitPrice;
-        this.quantity = quantity;
-    }
+    @Column(name = "descripcion")
+    @NotBlank(message = "No puede ingresar una descripcion vacia")
+    @NotNull(message = "No puede ingresar una descripcion nula")
+    private String descripcion;
+
+    @Column(name = "PRECIOUNITARIO")
+    @Positive(message = "El precioUnitario debe ser mayor a cero")
+    private int precioUnitario;
+
 
     public Long getId() {
         return id;
@@ -23,28 +35,29 @@ public class Product {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public String getDescription() {
-        return description;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public BigDecimal getUnitPrice() {
-        return unitPrice;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getPrecioUnitario() {
+        return precioUnitario;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setPrecioUnitario(int precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
+
+
 }
